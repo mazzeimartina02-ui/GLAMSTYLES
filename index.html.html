@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlamStyle - Negozio Online</title>
+    <style>
+        /* ---------------- Generale ---------------- */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffc0cb; /* rosa chiaro */
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------------- Header ---------------- */
+        header {
+            background-color: #ff69b4;
+            padding: 25px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        /* ---------------- Navbar ---------------- */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 15px 0;
+            background-color: #ff85c1;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ff69b4;
+            text-decoration: underline;
+        }
+
+        /* ---------------- Filtri ---------------- */
+        .filtri {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .filtri select {
+            padding: 8px;
+            margin: 0 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+        }
+
+        /* ---------------- Catalogo ---------------- */
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        .prodotto {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            width: 220px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .prodotto:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .prodotto img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .prodotto:hover img {
+            transform: scale(1.1);
+        }
+
+        .prodotto-info {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .prodotto-info h3 {
+            margin: 8px 0 5px 0;
+            font-size: 1.2em;
+        }
+
+        .prodotto-info p {
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .btn {
+            background-color: #ff69b4;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff3399;
+        }
+
+        /* ---------------- Footer ---------------- */
+        footer {
+            background-color: #ff69b4;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* ---------------- Animazioni Responsive ---------------- */
+        @media(max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            .catalogo {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .prodotto {
+                width: 160px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>GlamStyle</h1>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="#abiti">Abiti</a>
+        <a href="#scarpe">Scarpe</a>
+        <a href="#maglie">Maglie</a>
+        <a href="#pantaloni">Pantaloni</a>
+        <a href="#gonne">Gonne</a>
+    </nav>
+
+    <!-- Filtri -->
+    <div class="filtri">
+        <label>Categoria:
+            <select id="filtroCategoria" onchange="filtraProdotti()">
+                <option value="tutti">Tutti</option>
+                <option value="abiti">Abiti</option>
+                <option value="scarpe">Scarpe</option>
+                <option value="maglie">Maglie</option>
+                <option value="pantaloni">Pantaloni</option>
+                <option value="gonne">Gonne</option>
+            </select>
+        </label>
+        <label>Colore:
+            <select id="filtroColore" onchange="filtraProdotti()">
+                <option value="tutti">Tutti</option>
+                <option value="rosa">Rosa</option>
+                <option value="nero">Nero</option>
+                <option value="bianco">Bianco</option>
+                <option value="blu">Blu</option>
+            </select>
+        </label>
+    </div>
+
+    <!-- Catalogo -->
+    <section id="catalogo" class="catalogo">
+        <!-- Abiti -->
+        <div class="prodotto" data-categoria="abiti" data-colore="rosa">
+            <img src="https://via.placeholder.com/220x280?text=Abito+Fiori" alt="Abito Fiori Rosa">
+            <div class="prodotto-info">
+                <h3>Abito Fiori Rosa</h3>
+                <p>€49,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <div class="prodotto" data-categoria="abiti" data-colore="nero">
+            <img src="https://via.placeholder.com/220x280?text=Abito+Elegante" alt="Abito Elegante Nero">
+            <div class="prodotto-info">
+                <h3>Abito Elegante Nero</h3>
+                <p>€69,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <!-- Scarpe -->
+        <div class="prodotto" data-categoria="scarpe" data-colore="bianco">
+            <img src="https://via.placeholder.com/220x220?text=Sneakers" alt="Sneakers Bianche">
+            <div class="prodotto-info">
+                <h3>Sneakers Bianche</h3>
+                <p>€59,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <div class="prodotto" data-categoria="scarpe" data-colore="rosa">
+            <img src="https://via.placeholder.com/220x220?text=Sandali" alt="Sandali Rosa">
+            <div class="prodotto-info">
+                <h3>Sandali Rosa</h3>
+                <p>€34,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <!-- Maglie -->
+        <div class="prodotto" data-categoria="maglie" data-colore="bianco">
+            <img src="https://via.placeholder.com/220x220?text=Maglia" alt="Maglia Bianca">
+            <div class="prodotto-info">
+                <h3>Maglia Bianca</h3>
+                <p>€24,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <!-- Pantaloni -->
+        <div class="prodotto" data-categoria="pantaloni" data-colore="blu">
+            <img src="https://via.placeholder.com/220x220?text=Jeans+Blu" alt="Jeans Blu">
+            <div class="prodotto-info">
+                <h3>Jeans Blu</h3>
+                <p>€39,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <!-- Gonne -->
+        <div class="prodotto" data-categoria="gonne" data-colore="rosa">
+            <img src="https://via.placeholder.com/220x220?text=Gonna+Plissettata" alt="Gonna Plissettata Rosa">
+            <div class="prodotto-info">
+                <h3>Gonna Plissettata Rosa</h3>
+                <p>€29,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+
+        <div class="prodotto" data-categoria="gonne" data-colore="nero">
+            <img src="https://via.placeholder.com/220x220?text=Gonna+Mini" alt="Gonna Mini Nera">
+            <div class="prodotto-info">
+                <h3>Gonna Mini Nera</h3>
+                <p>€34,99</p>
+                <button class="btn">Aggiungi al carrello</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 GlamStyle - Tutti i diritti riservati</p>
+    </footer>
+
+    <!-- ---------------- JavaScript Filtri ---------------- -->
+    <script>
+        function filtraProdotti() {
+            const categoria = document.getElementById('filtroCategoria').value;
+            const colore = document.getElementById('filtroColore').value;
+            const prodotti = document.querySelectorAll('.prodotto');
+
+            prodotti.forEach(prod => {
+                const cat = prod.getAttribute('data-categoria');
+                const col = prod.getAttribute('data-colore');
+
+                if ((categoria === 'tutti' || cat === categoria) && 
+                    (colore === 'tutti' || col === colore)) {
+                    prod.style.display = 'block';
+                } else {
+                    prod.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
